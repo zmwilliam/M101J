@@ -1,0 +1,16 @@
+##Homepage query
+
+db.posts.explain("executionStats").find().sort({date: -1}).limit(10)
+db.posts.createIndex({date:-1});
+
+--
+##Tags query
+
+db.posts.explain("executionStats").find({tags:{$in:['respect']}}).sort({date: 1}).limit(10)
+db.posts.createIndex({tags: 1, date: -1});
+
+--
+##Permalink query
+
+db.posts.explain("executionStats").find({permalink:'cxzdzjkztkqraoqlgcru'}).first()
+db.posts.createIndex({permalink:1}, {unique:1})
